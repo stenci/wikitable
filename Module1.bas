@@ -2,7 +2,7 @@ Attribute VB_Name = "Module1"
 Option Explicit
 
 Sub Button1_Click()
-  Dim Sh As Worksheet, R As Integer, C As Integer, TableRows As New Collection, Txt As String, ColWidths(100) As Integer, CurrCell As Range
+  Dim Sh As Worksheet, R As Integer, C As Integer, TableRows As New Collection, Txt As String, ColWidths(100) As Integer, CurrCell As Range, CellText As String
   Set Sh = ActiveSheet
   
   For R = 1 To Sh.UsedRange.Rows.Count
@@ -17,14 +17,15 @@ Sub Button1_Click()
     Txt = "| "
     For C = 1 To Sh.UsedRange.Columns.Count
       Set CurrCell = Sh.Cells(R, C)
+      CellText = Replace(CurrCell.Text, "|", vbTab)
       If CurrCell.MergeArea.Columns.Count > 1 And CurrCell.MergeArea.Rows.Count > 1 Then
-        If CurrCell.Column = CurrCell.MergeArea.Column And CurrCell.Row = CurrCell.MergeArea.Row Then Txt = Txt & "colspan=""" & CurrCell.MergeArea.Columns.Count & """ rowspan=""" & CurrCell.MergeArea.Rows.Count & """" & vbTab & CurrCell.Text & " || "
+        If CurrCell.Column = CurrCell.MergeArea.Column And CurrCell.Row = CurrCell.MergeArea.Row Then Txt = Txt & "colspan=""" & CurrCell.MergeArea.Columns.Count & """ rowspan=""" & CurrCell.MergeArea.Rows.Count & """" & vbTab & CellText & " || "
       ElseIf CurrCell.MergeArea.Columns.Count > 1 Then
-        If CurrCell.Column = CurrCell.MergeArea.Column Then Txt = Txt & "colspan=""" & CurrCell.MergeArea.Columns.Count & """" & vbTab & CurrCell.Text & " || "
+        If CurrCell.Column = CurrCell.MergeArea.Column Then Txt = Txt & "colspan=""" & CurrCell.MergeArea.Columns.Count & """" & vbTab & CellText & " || "
       ElseIf CurrCell.MergeArea.Rows.Count > 1 Then
-        If CurrCell.Row = CurrCell.MergeArea.Row Then Txt = Txt & "rowspan=""" & CurrCell.MergeArea.Rows.Count & """" & vbTab & CurrCell.Text & " || "
+        If CurrCell.Row = CurrCell.MergeArea.Row Then Txt = Txt & "rowspan=""" & CurrCell.MergeArea.Rows.Count & """" & vbTab & CellText & " || "
       Else
-        Txt = Txt & ExtendString(CurrCell.Text, ColWidths(C)) & " || "
+        Txt = Txt & ExtendString(CellText, ColWidths(C)) & " || "
       End If
     Next C
     If Cells(R, 1).Font.Bold Then Txt = Replace(Txt, "|", "!")
