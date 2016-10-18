@@ -1,2 +1,2 @@
-"width=""90""|A",B,C
-1,2,3
+"width=""90""|Header one",Header two,Header three
+nowrap|text that shouldn't be wrapped,second text,third text
