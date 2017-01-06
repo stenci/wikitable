@@ -4,7 +4,7 @@ Export an Excel table to wikimedia format.
 
 Both horizontally and vertically merged cells are well managed.
 
-The output text is padded with spaces to that all the columns have the same width (with the exception of the columns with merged cells).
+The output text is padded with spaces so that all the columns have the same width (with the exception of the columns with merged cells).
 
 Bold cells are headers, other cells are normal cells.
 
