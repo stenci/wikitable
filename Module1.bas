@@ -18,6 +18,8 @@ Sub Button1_Click()
     For C = 1 To Sh.UsedRange.Columns.Count
       Set CurrCell = Sh.Cells(R, C)
       CellText = Replace(CurrCell.Text, "|", vbTab)
+      CellText = Replace(CellText, vbLf, "<br>")
+      If CurrCell.Font.Color = vbRed Then CellText = "nowrap|" & CellText
       If CurrCell.MergeArea.Columns.Count > 1 And CurrCell.MergeArea.Rows.Count > 1 Then
         If CurrCell.Column = CurrCell.MergeArea.Column And CurrCell.Row = CurrCell.MergeArea.Row Then Txt = Txt & "colspan=""" & CurrCell.MergeArea.Columns.Count & """ rowspan=""" & CurrCell.MergeArea.Rows.Count & """" & vbTab & CellText & " || "
       ElseIf CurrCell.MergeArea.Columns.Count > 1 Then
@@ -30,6 +32,8 @@ Sub Button1_Click()
     Next C
     If Cells(R, 1).Font.Bold Then Txt = Replace(Txt, "|", "!")
     Txt = Replace(Txt, vbTab, "|")
+    Txt = Replace(Txt, "|nowrap|", " nowrap|")
+    Txt = Replace(Txt, "|width=", " width=")
     TableRows.Add Left(Txt, Len(Txt) - 4)
   Next R
   TableRows.Add "|}"
