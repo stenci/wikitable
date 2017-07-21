@@ -2,12 +2,16 @@ Attribute VB_Name = "Module1"
 Option Explicit
 
 Sub Button1_Click()
-  Dim Sh As Worksheet, R As Integer, C As Integer, TableRows As New Collection, Txt As String, ColWidths(100) As Integer, CurrCell As Range, CellText As String
+  Dim Sh As Worksheet, R As Integer, C As Integer, TableRows As New Collection, Txt As String, ColWidths(100) As Integer, CurrCell As Range, CellText As String, L As Integer
   Set Sh = ActiveSheet
   
   For R = 1 To Sh.UsedRange.Rows.Count
     For C = 1 To Sh.UsedRange.Columns.Count
-      If Len(Sh.Cells(R, C).Text) > ColWidths(C) Then ColWidths(C) = Len(Sh.Cells(R, C).Text)
+      Set CurrCell = Sh.Cells(R, C)
+      CellText = Replace(CurrCell.Text, vbLf, "<br>")
+      L = Len(CellText)
+      If CurrCell.Font.Color = vbRed Then L = L + 7
+      If L > ColWidths(C) Then ColWidths(C) = L
     Next C
   Next R
   

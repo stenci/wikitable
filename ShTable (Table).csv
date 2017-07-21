@@ -1,2 +1,9 @@
-"width=""90""|Header one",Header two,Header three
-nowrap|text that shouldn't be wrapped,second text,third text
+Header 1,Header 2,Header 3,Header 4
+Text 1,"Row 1
+Row 2",Cells merged vertically,Text 1
+Longer text 2,"Row 1
+Row 2",,Text 2
+Text 3,"Row 1
+Longer row 2",,Text 3
+Text 4,"Row 1
+Row 2",Cells merged horizontally,
