@@ -8,6 +8,8 @@ The output text is padded with spaces so that all the columns have the same widt
 
 Bold cells are headers, other cells are normal cells.
 
+Red cells are nowrap.
+
 ##Example of input table:
 
 ![alt tag](Excel.png)
